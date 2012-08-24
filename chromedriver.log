@@ -1,0 +1,39 @@
+[0.000][INFO]:      ChromeDriver 23.0.1240.0 /L/tmp/chromedriver
+[0.537][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "chrome.switches": [  ],
+   "chromeOptions": {
+      "args": [  ],
+      "extensions": [  ]
+   },
+   "platform": "ANY",
+   "version": ""
+}
+
+[0.560][INFO]:      Launching chrome: /opt/google/chrome/google-chrome --enable-logging --log-level=1 --disable-hang-monitor --disable-prompt-on-repost --dom-automation --full-memory-crash-report --no-default-browser-check --no-first-run --disable-background-networking --disable-sync --disable-translate --disable-web-resources --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --password-store=basic --ignore-certificate-errors about:blank
+[12.028][INFO]:     Connected to Chrome successfully. Version: 21.0.1180.79
+[12.552][FINE]:     Command received (/session/41fa0fdc3ac8179ef42a38d8c9c2393a)
+[12.552][FINE]:     Command finished (/session/41fa0fdc3ac8179ef42a38d8c9c2393a) with response {
+   "sessionId": "41fa0fdc3ac8179ef42a38d8c9c2393a",
+   "status": 0,
+   "value": {
+      "acceptSslCerts": false,
+      "applicationCacheEnabled": false,
+      "browserConnectionEnabled": false,
+      "browserName": "chrome",
+      "chrome.chromedriverVersion": "23.0.1240.0",
+      "chrome.nativeEvents": false,
+      "cssSelectorsEnabled": true,
+      "databaseEnabled": false,
+      "handlesAlerts": true,
+      "javascriptEnabled": true,
+      "locationContextEnabled": false,
+      "nativeEvents": true,
+      "platform": "linux",
+      "rotatable": false,
+      "takesScreenshot": true,
+      "version": "21.0.1180.79",
+      "webStorageEnabled": true
+   }
+}
+
