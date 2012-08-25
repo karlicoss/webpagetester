@@ -1,4 +1,4 @@
-package ru.ifmo.ctddev.gerasimov;
+package ru.ifmo.ctddev.gerasimov.webpagetester;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -38,6 +38,10 @@ public class WebNode {
         if (element.getTagName().equals("form"))
             return true;
         return false;
+    }
+
+    public boolean isInput() {
+        return false;//TODO
     }
 
     public List<WebNode> getBlocks() {
