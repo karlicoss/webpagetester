@@ -2,6 +2,7 @@ package ru.ifmo.ctddev.gerasimov.webpagetester;
 
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +21,14 @@ public abstract class InputElement {
 
     public abstract String generate();
 
+    @Override
+    public String toString() {
+        return "Input element " + description;
+    }
 
-    public static InputElement makeInput(WebNode node, String description) {
+    public static InputElement makeInput(WebNode node) {
+        String description = node.getDescription();
+
         String tagName = node.element.getTagName();
         if (tagName.equals("textarea")) {
             return new Textarea(node, description);
@@ -32,24 +39,28 @@ public abstract class InputElement {
             if (type.equals("checkbox")) {
                 return new Checkbox(node, description);
             } else if (type.equals("password")) {
-
+                return new Password(node, description);
+            } else if (type.equals("text")) {
+                return new Textarea(node, description);//TODO Text class
+            } else if (type.equals("radio")) {
+                return new Radio(node, description);
+            } else {
+                //TODO file, image and HTML5 elements
             }
         }
         return null; //TODO
     }
 
-    public static boolean isInput(WebElement element) {
-        String tagName = element.getTagName();
-        return tagName.equals("input") || tagName.equals("select") || tagName.equals("textarea");
-    }
-
     public static List<InputElement> getInputs(WebNode node) {
+        List<InputElement> result = new ArrayList<InputElement>();
         if (node.isInput()) {
-            //TODO extract getDescription method
-            String title = node.element.getAttribute("title");
-            if (title != null) {
-
+            result.add(InputElement.makeInput(node));
+        } else {
+            for (WebNode child: node.children) {
+                result.addAll(InputElement.getInputs(child));
             }
         }
+        //TODO Postprocessing? Merging radiobuttons?
+        return result;
     }
 }

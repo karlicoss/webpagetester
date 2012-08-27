@@ -1,5 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester;
 
+import java.util.Random;
+
 /**
  * Created with IntelliJ IDEA.
  * User: karlicos
@@ -15,6 +17,16 @@ public class Password extends TextInputElement {
 
     @Override
     public String generate() {
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 5; i++) { //TODO UPPER BOUND
+            sb.append((char)('a' + r.nextInt(26))); //TODO Code generator
+        }
+        return sb.toString();
+    }
 
+    @Override
+    public String toString() {
+        return description + " password field";
     }
 }

@@ -24,4 +24,9 @@ public class Textarea extends TextInputElement {
         }
         return sb.toString();
     }
+
+    @Override
+    public String toString() {
+        return description + " textarea";
+    }
 }

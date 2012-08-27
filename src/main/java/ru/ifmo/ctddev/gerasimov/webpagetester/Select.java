@@ -10,10 +10,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Select extends FiniteInputElement {
-    public final List<String> variants;
-
     public Select(WebNode node, String description) {
-        super(node, description);
+        super(node, description, new String[0]);
         //TODO traverse node and set variants variable
     }
 
