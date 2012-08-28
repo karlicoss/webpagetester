@@ -1,6 +1,7 @@
-package ru.ifmo.ctddev.gerasimov.webpagetester;
+package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
-import java.util.List;
+import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+
 import java.util.Random;
 
 /**
@@ -13,8 +14,8 @@ import java.util.Random;
 public abstract class FiniteInputElement extends InputElement {
     String[] variants;
 
-    protected FiniteInputElement(WebNode node, String description, String[] variants) {
-        super(node, description);
+    protected FiniteInputElement(WebNode node, String[] variants) {
+        super(node);
         this.variants = variants;
     }
 

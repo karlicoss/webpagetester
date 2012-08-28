@@ -1,8 +1,7 @@
-package ru.ifmo.ctddev.gerasimov.webpagetester;
+package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.FiniteInputElement;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,12 +11,12 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public class Radio extends FiniteInputElement { //TODO same behaviour as Checkbox TODO extract Radiogroup class?
-    public Radio(WebNode node, String description) {
-        super(node, description, new String[]{"set", "unset"});
+    public Radio(WebNode node) {
+        super(node, new String[]{"set", "unset"});
     }
 
     @Override
     public String toString() {
-        return description + " radiobutton";
+        return getDescription() + " radiobutton";
     }
 }

@@ -1,4 +1,6 @@
-package ru.ifmo.ctddev.gerasimov.webpagetester;
+package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
+
+import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
 
 import java.util.Random;
 
@@ -11,8 +13,8 @@ import java.util.Random;
  */
 public class Password extends TextInputElement {
 
-    public Password(WebNode node, String description) {
-        super(node, description);
+    public Password(WebNode node) {
+        super(node);
     }
 
     @Override
@@ -27,6 +29,6 @@ public class Password extends TextInputElement {
 
     @Override
     public String toString() {
-        return description + " password field";
+        return getDescription() + " password field";
     }
 }

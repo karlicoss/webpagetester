@@ -1,4 +1,6 @@
-package ru.ifmo.ctddev.gerasimov.webpagetester;
+package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
+
+import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,8 +11,8 @@ package ru.ifmo.ctddev.gerasimov.webpagetester;
  */
 public abstract class TextInputElement extends InfiniteInputElement {
 
-    protected TextInputElement(WebNode node, String description) {
-        super(node, description);
+    protected TextInputElement(WebNode node) {
+        super(node);
     }
 
 }

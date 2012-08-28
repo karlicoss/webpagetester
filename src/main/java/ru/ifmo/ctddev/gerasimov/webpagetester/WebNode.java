@@ -2,6 +2,8 @@ package ru.ifmo.ctddev.gerasimov.webpagetester;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.Select;
+
 import java.util.*;
 
 /**
@@ -14,38 +16,36 @@ import java.util.*;
 public class WebNode {
     public final WebElement element;
     public final List<WebNode> children;
-    //private static int counter = 0;
+    public final WebNode parent;
 
-    public WebNode(WebElement element) {
+    private WebNode(WebElement element, WebNode parent) {
         this.element = element;
         this.children = new ArrayList<WebNode>();
+        this.parent = parent;
+    }
+
+    private static WebNode buildTreeHelper(WebElement element, WebNode parent) {
+        WebNode node = new WebNode(element, parent);
+        List<WebElement> children = element.findElements(By.xpath("*"));
+        for (WebElement child: children) {
+            node.children.add(WebNode.buildTreeHelper(child, node));
+        }
+        return node;
     }
 
     public static WebNode buildTree(WebElement element) {
-        //counter++;
-        //System.err.println(counter);
-        WebNode node = new WebNode(element);
-        List<WebElement> children = element.findElements(By.xpath("*"));
-        for (WebElement child: children) {
-            node.children.add(WebNode.buildTree(child));
-        }
-        return node;
+        return WebNode.buildTreeHelper(element, null);
     }
 
     public String toString() {
         return element.toString();
     }
 
-    public boolean isBlock() {
-        //System.out.println(element.getTagName());
-        if (element.getTagName().equals("form"))
-            return true;
-        return false;
+    public boolean isDisplayed() {
+        return element.isDisplayed();
     }
 
     public boolean isInput() {
-        if (!element.isDisplayed())
-            return false;
         String tagName = element.getTagName();
         if (tagName.equals("textarea")) {
             return true;
@@ -53,69 +53,76 @@ public class WebNode {
             return true;
         } else if (tagName.equals("input")) {
             String type = element.getAttribute("type");
-            return !type.equals("hidden");
+            if (type.equals("hidden")) {
+                return false;
+            } else if (type.equals("submit")) {
+                return false;
+            }
+            return true;
         }
         return false;
     }
 
-    public String getDescription() {
-        String title = element.getAttribute("title");
-        if (title != null && !title.isEmpty()) {
-            return title;
+    public boolean isSubmit() {
+        if (element.getTagName().equals("input") && element.getAttribute("type").equals("submit"))
+            return true;
+        if (element.getTagName().equals("button")) {
+            //TODO Some generic method?
+            String id = element.getAttribute("id");
+            //String class_ = element.getAttribute("class");
+            String type = element.getAttribute("type");
+            String onclick = element.getAttribute("onclick");
+            if (id != null && id.toLowerCase().contains("submit"))
+                return true;
+            if (type != null && type.toLowerCase().contains("submit"))
+                return true;
+            if (onclick != null && onclick.toLowerCase().contains("submit"))
+                return true;
         }
-
-        WebElement current = element;
-//        System.err.println("Processing " + element);
-        while (!current.getTagName().equals("body")) {
-//            System.err.println("Current tag: " + current);
-            String text = current.getText();
-//            System.err.println("Current text: " + text);
-            if (text.isEmpty()) {
-                current = current.findElement(By.xpath(".."));
-            } else {
-                return text;
-            }
-        }
-
-        return null;
+        return false;
     }
 
-    private Pair<List<WebNode>, Boolean> pblocks() {
-        List<WebNode> blocks = new ArrayList<WebNode>();
-        if (isInput()) {
-            return new Pair<List<WebNode>, Boolean>(blocks, true);
+    private Pair<List<WebNode>, Boolean> getFormsHelper() {
+        List<WebNode> forms = new ArrayList<WebNode>();
+        if (isInput() && isDisplayed()) {
+            return new Pair<List<WebNode>, Boolean>(forms, true);
         } else {
-            boolean hasBlock = false;
+            boolean hasForms = false;
             boolean hasInputs = false;
             List<Pair<List<WebNode>, Boolean>> results = new ArrayList<Pair<List<WebNode>, Boolean>>();
             for (WebNode child: children) {
-                Pair<List<WebNode>, Boolean> result = child.pblocks();
+                Pair<List<WebNode>, Boolean> result = child.getFormsHelper();
                 results.add(result);
-                hasBlock |= (result.first.size() > 0);
+                hasForms |= (result.first.size() > 0);
                 hasInputs |= result.second;
             }
-            if (hasBlock) {
+            if (hasForms) {
                 for (int i = 0; i < children.size(); i++) {
                     WebNode child = children.get(i);
                     Pair<List<WebNode>, Boolean> result = results.get(i);
-                    blocks.addAll(result.first);
+                    forms.addAll(result.first);
                     if (result.second) {
-                        blocks.add(child);
+                        forms.add(child);
                     }
                 }
-                return new Pair<List<WebNode>, Boolean>(blocks, false);
+                return new Pair<List<WebNode>, Boolean>(forms, false);
             } else {
-                if (isBlock()) {
-                    blocks.add(this);
+                if (element.getTagName().equals("form") && hasInputs) {
+                    forms.add(this);
+                    return new Pair<List<WebNode>, Boolean>(forms, false);
+                } else {
+                    return new Pair<List<WebNode>, Boolean>(forms, hasInputs);
                 }
-                return new Pair<List<WebNode>, Boolean>(blocks, hasInputs);
             }
         }
     }
 
-    public List<WebNode> getBlocks() {
-        Pair<List<WebNode>, Boolean> result = pblocks();
-        //TODO will the case result.second == true be present?
+    public List<WebNode> getForms() {
+        Pair<List<WebNode>, Boolean> result = getFormsHelper();
+        // The only reason to result.second to be true is if there were no <form> forms at all
+        if (result.second) {
+            result.first.add(this);
+        }
         return result.first;
     }
 }

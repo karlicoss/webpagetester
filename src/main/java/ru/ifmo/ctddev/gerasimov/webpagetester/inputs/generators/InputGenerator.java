@@ -1,4 +1,4 @@
-package ru.ifmo.ctddev.gerasimov.webpagetester;
+package ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators;
 
 /**
  * Created with IntelliJ IDEA.

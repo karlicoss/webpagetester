@@ -5,10 +5,9 @@ package ru.ifmo.ctddev.gerasimov.webpagetester; /**
  * Time: 6:22 PM
  * To change this template use File | Settings | File Templates.
  */
-import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElement;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,16 +25,6 @@ public class WebPageTester {
         random = new Random(424);
     }
 
-    public List<WebElement> getBlocks(WebElement body) {
-        List<WebElement> blocks = body.findElements(By.tagName("form"));
-        return blocks;
-    }
-
-    public List<WebElement> getInputs(WebElement form) {
-        List<WebElement> inputs = form.findElements(By.tagName("input"));
-        return inputs;
-    }
-
     public void run() throws IOException {
         Scanner in = new Scanner(System.in);
         PrintWriter out = new PrintWriter(new File("result.out"));
@@ -48,12 +37,14 @@ public class WebPageTester {
 
         WebElement body = driver.findElement(By.tagName("body"));
         WebNode root = WebNode.buildTree(body);
-        List<WebNode> blocks = root.getBlocks();
-        System.err.println(blocks);
-        for (WebNode block: blocks) {
-            System.err.println("Processing " + block);
-            List<InputElement> inputs = InputElement.getInputs(block);
+        List<WebNode> forms = root.getForms();
+        System.err.println(forms);
+        for (WebNode formNode: forms) {
+            Form form = Form.makeForm(formNode);
+            System.err.println("Processing " + form);
+            List<InputElement> inputs = form.getInputs();
             out.println(inputs);
+            out.println(form.submit());
         }
         out.close();
         driver.quit();
