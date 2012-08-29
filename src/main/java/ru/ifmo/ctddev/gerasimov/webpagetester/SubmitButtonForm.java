@@ -1,5 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.SubmitButton;
+
 /**
  * Created with IntelliJ IDEA.
  * User: karlicos
@@ -17,13 +19,13 @@ public class SubmitButtonForm extends Form {
 
     @Override
     public String submit() {
-        return submitButton.getDescription();
+        return null;
     }
 
     private static WebNode getSubmitButtonHelper(WebNode node) {
-        if (node.isSubmit())
+        if (SubmitButton.isSubmit(node)) {
             return node;
-        else {
+        } else {
             for (WebNode child: node.children) {
                 WebNode submit = getSubmitButtonHelper(child);
                 if (submit != null) {

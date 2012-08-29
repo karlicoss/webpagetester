@@ -21,7 +21,7 @@ public class Textarea extends TextInputElement {
     public String generate() {
         Random r = new Random();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 10; i++) { //TODO UPPER BOUND
+        for (int i = 0; i < 10; i++) {
             sb.append((char)('a' + r.nextInt(26)));
         }
         return sb.toString();

@@ -2,7 +2,8 @@ package ru.ifmo.ctddev.gerasimov.webpagetester;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.Select;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElement;
+import ru.ifmo.ctddev.gerasimov.webpagetester.utils.Pair;
 
 import java.util.*;
 
@@ -45,46 +46,9 @@ public class WebNode {
         return element.isDisplayed();
     }
 
-    public boolean isInput() {
-        String tagName = element.getTagName();
-        if (tagName.equals("textarea")) {
-            return true;
-        } else if (tagName.equals("select")) {
-            return true;
-        } else if (tagName.equals("input")) {
-            String type = element.getAttribute("type");
-            if (type.equals("hidden")) {
-                return false;
-            } else if (type.equals("submit")) {
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isSubmit() {
-        if (element.getTagName().equals("input") && element.getAttribute("type").equals("submit"))
-            return true;
-        if (element.getTagName().equals("button")) {
-            //TODO Some generic method?
-            String id = element.getAttribute("id");
-            //String class_ = element.getAttribute("class");
-            String type = element.getAttribute("type");
-            String onclick = element.getAttribute("onclick");
-            if (id != null && id.toLowerCase().contains("submit"))
-                return true;
-            if (type != null && type.toLowerCase().contains("submit"))
-                return true;
-            if (onclick != null && onclick.toLowerCase().contains("submit"))
-                return true;
-        }
-        return false;
-    }
-
     private Pair<List<WebNode>, Boolean> getFormsHelper() {
         List<WebNode> forms = new ArrayList<WebNode>();
-        if (isInput() && isDisplayed()) {
+        if (InputElement.isInput(this) && isDisplayed()) {
             return new Pair<List<WebNode>, Boolean>(forms, true);
         } else {
             boolean hasForms = false;

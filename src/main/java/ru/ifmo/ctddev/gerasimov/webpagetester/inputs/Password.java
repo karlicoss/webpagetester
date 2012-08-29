@@ -21,8 +21,8 @@ public class Password extends TextInputElement {
     public String generate() {
         Random r = new Random();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 5; i++) { //TODO UPPER BOUND
-            sb.append((char)('a' + r.nextInt(26))); //TODO Code generator
+        for (int i = 0; i < 5; i++) {
+            sb.append((char)('a' + r.nextInt(26)));
         }
         return sb.toString();
     }

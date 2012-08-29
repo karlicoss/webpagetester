@@ -9,7 +9,7 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
  * Time: 10:58 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class InfiniteInputElement extends InputElement {
+public abstract class InfiniteInputElement extends PassiveInputElement {
     protected InfiniteInputElement(WebNode node) {
         super(node);
     }

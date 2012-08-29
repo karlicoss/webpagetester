@@ -7,12 +7,18 @@ package ru.ifmo.ctddev.gerasimov.webpagetester; /**
  */
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElement;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.PassiveInputElement;
+import sun.misc.Regexp;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WebPageTester {
     private WebDriver driver;
@@ -21,16 +27,18 @@ public class WebPageTester {
     public WebPageTester() {
         System.setProperty("webdriver.chrome.driver", "/L/tmp/chromedriver");
 //        driver = new HtmlUnitDriver();
-        driver = new ChromeDriver();
+//        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         random = new Random(424);
     }
 
     public void run() throws IOException {
         Scanner in = new Scanner(System.in);
-        PrintWriter out = new PrintWriter(new File("result.out"));
         System.out.println("Please enter url:");
         String url = in.nextLine();
         driver.get(url);
+
+        PrintWriter out = new PrintWriter(new File("reports", url.replaceAll("[\\?\\*\\:\\\\/\\>\\<]", "_") + ".report"));
 
         //Selenium selenium = (Selenium)driver;
         //System.out.println(selenium.getAllFields());
@@ -44,15 +52,13 @@ public class WebPageTester {
             System.err.println("Processing " + form);
             List<InputElement> inputs = form.getInputs();
             out.println(inputs);
-            out.println(form.submit());
+            //out.println(form.submit());
         }
         out.close();
         driver.quit();
     }
 
     public static void main(String[] args) throws IOException {
-        //System.err.println(System.getProperty("webdriver.chrome.driver"));
-
         new WebPageTester().run();
     }
 }

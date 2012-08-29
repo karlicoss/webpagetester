@@ -1,6 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester;
 
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElement;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.PassiveInputElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public abstract class Form {
 
     private List<InputElement> getInputsHelper(WebNode node) {
         List<InputElement> result = new ArrayList<InputElement>();
-        if (node.isInput() && node.isDisplayed()) {
+        if (InputElement.isInput(node) && node.isDisplayed()) {
             result.add(InputElement.makeInput(node));
         } else {
             for (WebNode child: node.children) {

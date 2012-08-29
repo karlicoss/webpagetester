@@ -11,7 +11,7 @@ import java.util.Random;
  * Time: 10:57 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class FiniteInputElement extends InputElement {
+public abstract class FiniteInputElement extends PassiveInputElement {
     String[] variants;
 
     protected FiniteInputElement(WebNode node, String[] variants) {

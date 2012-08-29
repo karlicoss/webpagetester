@@ -40,13 +40,21 @@ public class Select extends FiniteInputElement {
         return result;
     }
 
-    public String getDescription(WebNode node) {
+
+
+    @Override
+    public String getDescription() {
         List<WebNode> options = collectOptionsHelper(node);
         for (WebNode option: options) {
             if (option.element.getAttribute("selected") != null)
                 return option.element.getText();
         }
         return super.getDescription();
+    }
+
+    @Override
+    public String toString() {
+        return getDescription() + " select";
     }
 
     public static boolean isSelect(WebNode node) {
