@@ -1,7 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
-import org.openqa.selenium.WebElement;
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.UniformFiniteInputGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +39,6 @@ public class Select extends FiniteInputElement {
         }
         return result;
     }
-
-
 
     @Override
     public String getDescription() {

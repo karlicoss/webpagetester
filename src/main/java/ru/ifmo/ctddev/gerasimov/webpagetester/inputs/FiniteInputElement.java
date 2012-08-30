@@ -1,6 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.FiniteInputGenerator;
 
 import java.util.Random;
 
@@ -12,17 +13,14 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class FiniteInputElement extends PassiveInputElement {
-    String[] variants;
+    final protected String[] variants;
+
+    public final String[] getVariants() {
+        return variants;
+    }
 
     protected FiniteInputElement(WebNode node, String[] variants) {
         super(node);
         this.variants = variants;
-    }
-
-    @Override
-    public String generate() {
-        Random random = new Random();
-        int i = random.nextInt(variants.length);
-        return variants[i];
     }
 }

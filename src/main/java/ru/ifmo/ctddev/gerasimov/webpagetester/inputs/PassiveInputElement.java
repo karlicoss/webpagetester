@@ -1,6 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.InputGenerator;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,5 +16,4 @@ public abstract class PassiveInputElement extends InputElement {
         super(node);
     }
 
-    public abstract String generate();
 }

@@ -1,6 +1,9 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.ButtonGenerator;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.UniformFiniteInputGenerator;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.UniformTextGenerator;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,7 +13,7 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class InputElement {
-    protected WebNode node;
+    protected final WebNode node;
 
     protected InputElement(WebNode node) {
         this.node = node;
@@ -23,7 +26,7 @@ public abstract class InputElement {
         }
 
         WebNode current = node;
-        while (!current.element.getTagName().equals("body")) {
+        while (current != null) {
             String text = current.element.getText();
             if (text.isEmpty()) {
                 current = current.parent;

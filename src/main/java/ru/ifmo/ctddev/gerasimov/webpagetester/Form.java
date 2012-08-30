@@ -20,12 +20,12 @@ public abstract class Form {
         this.form = form;
     }
 
-    public abstract String submit();
+    public abstract String generate();
 
     public static Form makeForm(WebNode form) {
         WebNode button = SubmitButtonForm.getSubmitButton(form);
         if (button != null) {
-            return new SubmitButtonForm(form, button);
+            return new SubmitButtonForm(form);
         }
         //TODO other submit methods
         //TODO some pattern to let easy submit methods adding

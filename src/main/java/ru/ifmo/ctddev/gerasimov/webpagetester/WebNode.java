@@ -25,6 +25,12 @@ public class WebNode {
         this.parent = parent;
     }
 
+    private WebNode copy() {
+        WebNode node = new WebNode(this.element, null);
+        node.children.addAll(this.children);
+        return node;
+    }
+
     private static WebNode buildTreeHelper(WebElement element, WebNode parent) {
         WebNode node = new WebNode(element, parent);
         List<WebElement> children = element.findElements(By.xpath("*"));
@@ -87,6 +93,10 @@ public class WebNode {
         if (result.second) {
             result.first.add(this);
         }
-        return result.first;
+        List<WebNode> answer = new ArrayList<WebNode>();
+        for (WebNode node: result.first) {
+            answer.add(node.copy());
+        }
+        return answer;
     }
 }

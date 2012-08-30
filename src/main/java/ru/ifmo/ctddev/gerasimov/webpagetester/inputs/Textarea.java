@@ -1,6 +1,8 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.TextInputGenerator;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.UniformTextInputGenerator;
 
 import java.util.Random;
 
@@ -12,19 +14,8 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public class Textarea extends TextInputElement {
-
     public Textarea(WebNode node) {
         super(node);
-    }
-
-    @Override
-    public String generate() {
-        Random r = new Random();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 10; i++) {
-            sb.append((char)('a' + r.nextInt(26)));
-        }
-        return sb.toString();
     }
 
     @Override

@@ -1,8 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
-
-import java.util.Random;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.TextInputGenerator;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,16 +14,6 @@ public class Password extends TextInputElement {
 
     public Password(WebNode node) {
         super(node);
-    }
-
-    @Override
-    public String generate() {
-        Random r = new Random();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            sb.append((char)('a' + r.nextInt(26)));
-        }
-        return sb.toString();
     }
 
     @Override

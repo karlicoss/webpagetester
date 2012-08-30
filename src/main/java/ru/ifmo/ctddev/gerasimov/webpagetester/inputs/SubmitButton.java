@@ -1,7 +1,9 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
-import org.openqa.selenium.WebElement;
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.ActiveInputGenerator;
+
+import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,19 +13,19 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
  * To change this template use File | Settings | File Templates.
  */
 public class SubmitButton extends ActiveInputElement {
+
     public SubmitButton(WebNode node) {
         super(node);
     }
 
-    @Override
-    public String action() {
-        return "Click " + getDescription();
+    public String[] getActions() { //TODO Pretty similar to FiniteInputElement
+        return new String[] {"click"};
     }
 
     @Override
     public String getDescription() {
         String value = node.element.getAttribute("value");
-        if (value != null)
+        if (value != null && !value.isEmpty())
             return value;
         return super.getDescription();    //To change body of overridden methods use File | Settings | File Templates.
     }

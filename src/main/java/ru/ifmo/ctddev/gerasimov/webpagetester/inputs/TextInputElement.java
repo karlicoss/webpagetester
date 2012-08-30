@@ -1,6 +1,9 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.TextInputGenerator;
+
+import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
