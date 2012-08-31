@@ -10,7 +10,17 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
  * To change this template use File | Settings | File Templates.
  */
 public class InputElementFactory {
-    public static boolean isInput(WebNode node) {
+    protected static InputElementFactory instance = new InputElementFactory();
+
+    protected InputElementFactory() {
+
+    }
+
+    public static InputElementFactory getInstance() {
+        return instance;
+    }
+
+    public boolean isInput(WebNode node) {
         if (SubmitButton.isSubmit(node))
             return true;
         if (Button.isButton(node))
@@ -32,7 +42,7 @@ public class InputElementFactory {
         return false;
     }
 
-    public static InputElement makeInput(WebNode node) {
+    public InputElement makeInput(WebNode node) {
         //TODO how to keep consistent with isInput method? Use reflection?
         if (SubmitButton.isSubmit(node))
             return new SubmitButton(node);

@@ -22,8 +22,8 @@ public class InputAndClickButtonForm extends Form {
     private final List<PassiveInputElement> passive;
     private final List<PassiveInputGenerator> passiveGenerators;
 
-    public InputAndClickButtonForm(WebNode form) {
-        super(form);
+    public InputAndClickButtonForm(WebNode form, InputElementFactory inputFactory, InputGeneratorFactory inputGeneratorFactory) {
+        super(form, inputFactory);
         buttons = new ArrayList<Button>();
         activeGenerators = new ArrayList<ActiveInputGenerator>();
         passive = new ArrayList<PassiveInputElement>();
@@ -36,18 +36,10 @@ public class InputAndClickButtonForm extends Form {
             }
         }
         for (Button input: buttons) {
-            activeGenerators.add(new ButtonGenerator(input));
+            inputGeneratorFactory.getGenerator(input);
         }
         for (PassiveInputElement input: passive) {
-            if (input instanceof FiniteInputElement) {
-                passiveGenerators.add(new UniformFiniteInputGenerator((FiniteInputElement)input));
-            } else {
-                if (input instanceof Password) {
-                    passiveGenerators.add(new UniformPasswordGenerator((Password)input, 8));
-                } else {
-                    passiveGenerators.add(new UniformTextGenerator((TextInputElement)input, 30));
-                }
-            }
+            inputGeneratorFactory.getGenerator(input);
         }
     }
 

@@ -9,8 +9,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.ifmo.ctddev.gerasimov.webpagetester.forms.Form;
+import ru.ifmo.ctddev.gerasimov.webpagetester.forms.FormFactory;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElement;
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElementFactory;
 import ru.ifmo.ctddev.gerasimov.webpagetester.links.Link;
+import ru.ifmo.ctddev.gerasimov.webpagetester.links.LinkFactory;
 import ru.ifmo.ctddev.gerasimov.webpagetester.utils.Pair;
 
 import java.io.File;
@@ -30,7 +33,7 @@ public class WebPageTester {
     private void linkTests(WebNode root) throws FileNotFoundException {
         PrintWriter out = new PrintWriter(new File(testName + ".links"));
 
-        List<Link> links = Link.getLinks(root);
+        List<Link> links = Link.getLinks(root, LinkFactory.getInstance());
         for (Link link: links) {
             out.println(link.getDescription() + " link");
         }
@@ -41,7 +44,7 @@ public class WebPageTester {
     private void formTests(WebNode root) throws FileNotFoundException {
         PrintWriter out = new PrintWriter(new File(testName + ".forms"));
 
-        List<Form> forms = Form.getForms(root);
+        List<Form> forms = Form.getForms(root, FormFactory.getInstance(), InputElementFactory.getInstance());
         System.err.println(forms);
         for (Form form: forms) {
             System.err.println("Processing " + form);

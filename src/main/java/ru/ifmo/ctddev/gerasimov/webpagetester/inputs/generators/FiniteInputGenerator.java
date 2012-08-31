@@ -12,7 +12,7 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.FiniteInputElement;
 public abstract class FiniteInputGenerator extends PassiveInputGenerator {
     protected final String[] variants;
 
-    public FiniteInputGenerator(FiniteInputElement input) {
+    protected FiniteInputGenerator(FiniteInputElement input) {
         this.variants = input.getVariants();
     }
 }

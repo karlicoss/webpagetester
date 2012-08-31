@@ -42,7 +42,7 @@
                 <configuration>
                     <mainClass>ru.ifmo.ctddev.gerasimov.webpagetester.WebPageTester</mainClass>
                     <arguments>
-                        <argument>http://localhost:8080/sandbox</argument>
+                        <argument>http://rosalind.info/</argument>
                     </arguments>
                 </configuration>
             </plugin>

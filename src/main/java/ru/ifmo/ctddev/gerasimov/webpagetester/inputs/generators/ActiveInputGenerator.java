@@ -10,7 +10,7 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.ActiveInputElement;
 * To change this template use File | Settings | File Templates.
 */
 public abstract class ActiveInputGenerator extends InputGenerator {
-    public ActiveInputGenerator(ActiveInputElement input) {
+    protected ActiveInputGenerator(ActiveInputElement input) {
 
     }
 }

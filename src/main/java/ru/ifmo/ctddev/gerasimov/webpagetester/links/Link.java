@@ -21,23 +21,23 @@ public abstract class Link {
 
     public abstract String getDescription();
 
-    private static void getLinksHelper(WebNode node, List<WebNode> result) {
-        if (LinkFactory.isLink(node)) {
+    private static void getLinksHelper(WebNode node, List<WebNode> result, LinkFactory factory) {
+        if (factory.isLink(node)) {
             result.add(node);
             return;
         }
         for (WebNode child: node.children) {
-            getLinksHelper(child, result);
+            getLinksHelper(child, result, factory);
         }
     }
 
-    public static List<Link> getLinks(WebNode node) {
+    public static List<Link> getLinks(WebNode node, LinkFactory factory) {
         List<WebNode> nodes = new ArrayList<WebNode>();
-        getLinksHelper(node, nodes);
+        getLinksHelper(node, nodes, factory);
         List<Link> result = new ArrayList<Link>();
 
         for (WebNode wnode: nodes) {
-            Link link = LinkFactory.makeLink(wnode);
+            Link link = factory.makeLink(wnode);
             if (link != null) {
                 result.add(link);
             }

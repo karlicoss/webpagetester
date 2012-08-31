@@ -10,13 +10,23 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
  * To change this template use File | Settings | File Templates.
  */
 public class LinkFactory {
-    public static boolean isLink(WebNode node) {
+    protected static LinkFactory instance = new LinkFactory();
+
+    protected LinkFactory() {
+
+    }
+
+    public static LinkFactory getInstance() {
+        return instance;
+    }
+
+    public boolean isLink(WebNode node) {
         if (HrefLink.isHrefLink(node))
             return true;
         return false;
     }
 
-    public static Link makeLink(WebNode node) {
+    public Link makeLink(WebNode node) {
         if (HrefLink.isHrefLink(node))
             return new HrefLink(node);
         return null;
