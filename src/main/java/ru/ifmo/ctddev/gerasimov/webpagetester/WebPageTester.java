@@ -7,8 +7,7 @@ package ru.ifmo.ctddev.gerasimov.webpagetester; /**
  */
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElement;
+import ru.ifmo.ctddev.gerasimov.webpagetester.forms.Form;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class WebPageTester {
 
         WebElement body = driver.findElement(By.tagName("body"));
         WebNode root = WebNode.buildTree(body);
-        List<WebNode> forms = root.getForms();
+        List<WebNode> forms = Form.getForms(root);
         System.err.println(forms);
         for (WebNode formNode: forms) {
             Form form = Form.makeForm(formNode);

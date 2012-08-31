@@ -16,6 +16,10 @@ public class Password extends TextInputElement {
         super(node);
     }
 
+    public static boolean isPassword(WebNode node) {
+        return node.element.getTagName().equals("input") && node.element.getAttribute("type").equals("password");
+    }
+
     @Override
     public String toString() {
         return getDescription() + " password field";

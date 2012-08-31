@@ -13,9 +13,12 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class TextInputElement extends InfiniteInputElement {
-
-    protected TextInputElement(WebNode node) {
+    public TextInputElement(WebNode node) {
         super(node);
     }
 
+    @Override
+    public String toString() {
+        return getDescription() + " text field";
+    }
 }

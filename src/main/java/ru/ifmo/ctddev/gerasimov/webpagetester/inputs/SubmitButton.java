@@ -39,7 +39,6 @@ public class SubmitButton extends ActiveInputElement {
         if (node.element.getTagName().equals("input") && node.element.getAttribute("type").equals("submit"))
             return true;
         if (node.element.getTagName().equals("button")) {
-            //TODO Some generic method?
             String id = node.element.getAttribute("id");
             //String class_ = element.getAttribute("class");
             String type = node.element.getAttribute("type");

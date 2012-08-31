@@ -18,6 +18,10 @@ public class Textarea extends TextInputElement {
         super(node);
     }
 
+    public static boolean isTextarea(WebNode node) {
+        return node.element.getTagName().equals("textarea");
+    }
+
     @Override
     public String toString() {
         return getDescription() + " textarea";

@@ -20,7 +20,7 @@ public class Checkbox extends FiniteInputElement {
         return getDescription() + " checkbox";
     }
 
-    public boolean isCheckbox(WebNode node) {
+    public static boolean isCheckbox(WebNode node) {
         return node.element.getTagName().equals("input") && node.element.getAttribute("type").equals("checkbox");
     }
 }

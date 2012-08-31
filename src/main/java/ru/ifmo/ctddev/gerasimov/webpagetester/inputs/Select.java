@@ -56,6 +56,6 @@ public class Select extends FiniteInputElement {
     }
 
     public static boolean isSelect(WebNode node) {
-        return node.element.getTagName().equals("input") && node.element.getAttribute("type").equals("select");
+        return node.element.getTagName().equals("select");
     }
 }
