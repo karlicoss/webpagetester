@@ -2,9 +2,6 @@ package ru.ifmo.ctddev.gerasimov.webpagetester;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElement;
-import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputFactory;
-import ru.ifmo.ctddev.gerasimov.webpagetester.utils.Pair;
 
 import java.util.*;
 

@@ -11,9 +11,14 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.InputGenerator;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class ActiveInputElement extends InputElement {
+    protected final String[] actions;
 
-    protected ActiveInputElement(WebNode node) {
+    protected ActiveInputElement(WebNode node, String[] actions) {
         super(node);
+        this.actions = actions;
     }
 
+    public String[] getActions() { //TODO Pretty similar to FiniteInputElement
+        return new String[] {"click"};
+    }
 }

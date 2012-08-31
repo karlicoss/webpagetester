@@ -3,6 +3,7 @@ package ru.ifmo.ctddev.gerasimov.webpagetester.forms;
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.*;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.*;
+import ru.ifmo.ctddev.gerasimov.webpagetester.utils.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,29 +16,27 @@ import java.util.Random;
  * Time: 4:27 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SubmitButtonForm extends Form {
-    private final List<SubmitButton> submits;
-    private final List<ActiveInputGenerator> submitGenerators;
+public class InputAndClickButtonForm extends Form {
+    private final List<Button> buttons;
+    private final List<ActiveInputGenerator> activeGenerators;
     private final List<PassiveInputElement> passive;
     private final List<PassiveInputGenerator> passiveGenerators;
 
-    public SubmitButtonForm(WebNode form) {
+    public InputAndClickButtonForm(WebNode form) {
         super(form);
-        submits = new ArrayList<SubmitButton>();
-        submitGenerators = new ArrayList<ActiveInputGenerator>();
+        buttons = new ArrayList<Button>();
+        activeGenerators = new ArrayList<ActiveInputGenerator>();
         passive = new ArrayList<PassiveInputElement>();
         passiveGenerators = new ArrayList<PassiveInputGenerator>();
         for (InputElement input: inputs) {
-            if (input instanceof SubmitButton) {
-                submits.add((SubmitButton) input);
+            if (input instanceof Button) {
+                buttons.add((Button) input);
             } else if (input instanceof PassiveInputElement) {
                 passive.add((PassiveInputElement)input);
             }
         }
-        for (SubmitButton input: submits) {
-            if (input instanceof SubmitButton) {
-                submitGenerators.add(new ButtonGenerator(input));
-            }
+        for (Button input: buttons) {
+            activeGenerators.add(new ButtonGenerator(input));
         }
         for (PassiveInputElement input: passive) {
             if (input instanceof FiniteInputElement) {
@@ -53,23 +52,23 @@ public class SubmitButtonForm extends Form {
     }
 
     @Override
-    public String generate() {
+    public List<Pair<InputElement, String>> generate() {
         Random random = new Random();
-        StringBuilder sb = new StringBuilder();
+        List<Pair<InputElement, String>> result = new ArrayList<Pair<InputElement, String>>();
         for (int i = 0; i < passive.size(); i++) {
-            sb.append(passive.get(i).toString() + ": " + passiveGenerators.get(i).generate() + "\n");
+            result.add(new Pair<InputElement, String>(passive.get(i), passiveGenerators.get(i).generate()));
         }
-        int ai = random.nextInt(submits.size());
-        sb.append(submits.get(ai).getDescription() + ": " + submitGenerators.get(ai).generate());
-        return sb.toString();
+        int ai = random.nextInt(buttons.size());
+        result.add(new Pair<InputElement, String>(buttons.get(ai), activeGenerators.get(ai).generate()));
+        return result;
     }
 
-    private static boolean containsSubmitButton(WebNode node) {
-        if (SubmitButton.isSubmit(node)) {
+    private static boolean containsButton(WebNode node) {
+        if (Button.isButton(node) && node.isDisplayed()) {
             return true;
         } else {
             for (WebNode child: node.children) {
-                boolean contains = containsSubmitButton(child);
+                boolean contains = containsButton(child);
                 if (contains) {
                     return true;
                 }
@@ -78,8 +77,8 @@ public class SubmitButtonForm extends Form {
         return false;
     }
 
-    public static boolean isSubmitButtonForm(WebNode form) {
-        return containsSubmitButton(form);
+    public static boolean isInputAndClickButtonForm(WebNode form) {
+        return containsButton(form);
     }
 }
 

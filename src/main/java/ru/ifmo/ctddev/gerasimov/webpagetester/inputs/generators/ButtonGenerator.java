@@ -1,5 +1,6 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.Button;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.SubmitButton;
 
 import java.util.Random;
@@ -15,7 +16,7 @@ public class ButtonGenerator extends ActiveInputGenerator {
     private final String[] actions;
     private final Random random;
 
-    public ButtonGenerator(SubmitButton button) {
+    public ButtonGenerator(Button button) {
         super(button);
         this.actions = button.getActions();
         this.random = new Random();

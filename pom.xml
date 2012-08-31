@@ -42,7 +42,7 @@
                 <configuration>
                     <mainClass>ru.ifmo.ctddev.gerasimov.webpagetester.WebPageTester</mainClass>
                     <arguments>
-                        <argument>argument1</argument>
+                        <argument>http://localhost:8080/sandbox</argument>
                     </arguments>
                 </configuration>
             </plugin>
