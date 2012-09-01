@@ -1,5 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.forms;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.InconsistencyException;
+import ru.ifmo.ctddev.gerasimov.webpagetester.NotSupportedException;
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.InputElementFactory;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.UniformInputGeneratorFactory;
@@ -31,7 +33,12 @@ public class FormFactory {
     public Form makeForm(WebNode form, InputElementFactory inputFactory) {
         if (InputAndClickButtonForm.isInputAndClickButtonForm(form))
             return new InputAndClickButtonForm(form, inputFactory, UniformInputGeneratorFactory.getInstance());
+
         //TODO other submit methods like EnterPressForm?
-        return null;
+
+        if (isForm(form))
+            throw new InconsistencyException("Form.makeForm", "Form.isForm on ", form.toString());
+        else
+            throw new NotSupportedException("Form.makeForm", form.toString());
     }
 }

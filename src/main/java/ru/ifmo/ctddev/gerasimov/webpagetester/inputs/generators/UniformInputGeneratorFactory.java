@@ -1,5 +1,6 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.NotSupportedException;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.*;
 
 /**
@@ -31,7 +32,8 @@ public class UniformInputGeneratorFactory extends InputGeneratorFactory {
                 }
             }
         }
-        return null;//TODO throw some exception
+
+        throw new NotSupportedException("UniformInputGenerator.getGenerator", input.toString());
     }
 
     protected UniformInputGeneratorFactory() {

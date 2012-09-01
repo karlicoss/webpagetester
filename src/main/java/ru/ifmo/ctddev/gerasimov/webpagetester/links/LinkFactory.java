@@ -1,5 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.links;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.InconsistencyException;
+import ru.ifmo.ctddev.gerasimov.webpagetester.NotSupportedException;
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
 
 /**
@@ -29,6 +31,12 @@ public class LinkFactory {
     public Link makeLink(WebNode node) {
         if (HrefLink.isHrefLink(node))
             return new HrefLink(node);
-        return null;
+
+
+        if (isLink(node)) {
+            throw new InconsistencyException("LinkFactory.makeLink", "LinkFactory.isLink", node.toString());
+        } else {
+            throw new NotSupportedException("LinkFactory.makeLink", node.toString());
+        }
     }
 }

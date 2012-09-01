@@ -1,5 +1,7 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.InconsistencyException;
+import ru.ifmo.ctddev.gerasimov.webpagetester.NotSupportedException;
 import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
 
 /**
@@ -38,7 +40,7 @@ public class InputElementFactory {
         if (Select.isSelect(node))
             return true;
 
-        //TODO other buttons, file, image and HTML5 elements
+        //TODO file, image and HTML5 elements
         return false;
     }
 
@@ -61,6 +63,10 @@ public class InputElementFactory {
         if (Select.isSelect(node))
             return new Select(node);
         //TODO postprocessing of radio buttons?
-        return null;
+
+        if (isInput(node))
+            throw new InconsistencyException("InputElementFactory.makeInput", "InputElementFactory.isInput", node.toString());
+        else
+            throw new NotSupportedException("InputEleemntFactory.makeInput", node.toString());
     }
 }
