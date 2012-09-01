@@ -10,7 +10,6 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.UniformTextGener
  * User: karlicos
  * Date: 8/28/12
  * Time: 11:22 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class InputElement {
     protected final WebNode node;

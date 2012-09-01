@@ -1,5 +1,6 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.Config;
 import ru.ifmo.ctddev.gerasimov.webpagetester.NotSupportedException;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.*;
 
@@ -8,11 +9,16 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.*;
  * User: karlicos
  * Date: 9/1/12
  * Time: 2:59 AM
- * To change this template use File | Settings | File Templates.
  */
 public class UniformInputGeneratorFactory extends InputGeneratorFactory {
-    static {
-        instance = new UniformInputGeneratorFactory();
+    private static InputGeneratorFactory instance = new UniformInputGeneratorFactory();
+
+    protected UniformInputGeneratorFactory() {
+        super();
+    }
+
+    public static InputGeneratorFactory getInstance() {
+        return instance;
     }
 
     @Override
@@ -26,18 +32,14 @@ public class UniformInputGeneratorFactory extends InputGeneratorFactory {
                 return new UniformFiniteInputGenerator((FiniteInputElement)input);
             } else if (input instanceof InfiniteInputElement) {
                 if (input instanceof Password) {
-                    return new UniformPasswordGenerator((Password)input, 5);
+                    return new UniformPasswordGenerator((Password)input, Config.getInstance().getInt("password.maxlength"));
                 } else if (input instanceof TextInputElement) {
-                    return new UniformTextGenerator((TextInputElement)input, 10);
+                    return new UniformTextGenerator((TextInputElement)input, Config.getInstance().getInt("text.maxlength"));
                 }
             }
         }
 
         throw new NotSupportedException("UniformInputGenerator.getGenerator", input.toString());
-    }
-
-    protected UniformInputGeneratorFactory() {
-
     }
 
 }

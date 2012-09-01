@@ -11,7 +11,6 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.UniformInputGene
  * User: karlicos
  * Date: 9/1/12
  * Time: 2:09 AM
- * To change this template use File | Settings | File Templates.
  */
 public class FormFactory {
     protected static FormFactory instance = new FormFactory();

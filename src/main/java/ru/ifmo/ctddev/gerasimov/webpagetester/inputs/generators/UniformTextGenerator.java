@@ -1,5 +1,6 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.Config;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.TextInputElement;
 
 import java.util.Random;
@@ -13,10 +14,10 @@ import java.util.Random;
 */
 public class UniformTextGenerator extends UniformTextInputGenerator {
     public UniformTextGenerator(TextInputElement input, int length) {
-        super(input, "abcdef123ABCDEF".toCharArray(), length);
+        super(input, Config.getInstance().getString("text.possiblechars").toCharArray(), length);
     }
 
     public UniformTextGenerator(TextInputElement input, int length, Random random) {
-        super(input, "abcdef123ABCDEF".toCharArray(), length, random);
+        super(input, Config.getInstance().getString("text.possiblechars").toCharArray(), length, random);
     }
 }

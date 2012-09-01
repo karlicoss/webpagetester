@@ -14,20 +14,19 @@ import java.util.Random;
  * User: karlicos
  * Date: 8/28/12
  * Time: 4:27 PM
- * To change this template use File | Settings | File Templates.
  */
 public class InputAndClickButtonForm extends Form {
     private final List<Button> buttons;
-    private final List<ActiveInputGenerator> activeGenerators;
+    private final List<InputGenerator> activeGenerators;
     private final List<PassiveInputElement> passive;
-    private final List<PassiveInputGenerator> passiveGenerators;
+    private final List<InputGenerator> passiveGenerators;
 
     public InputAndClickButtonForm(WebNode form, InputElementFactory inputFactory, InputGeneratorFactory inputGeneratorFactory) {
         super(form, inputFactory);
         buttons = new ArrayList<Button>();
-        activeGenerators = new ArrayList<ActiveInputGenerator>();
+        activeGenerators = new ArrayList<InputGenerator>();
         passive = new ArrayList<PassiveInputElement>();
-        passiveGenerators = new ArrayList<PassiveInputGenerator>();
+        passiveGenerators = new ArrayList<InputGenerator>();
         for (InputElement input: inputs) {
             if (input instanceof Button) {
                 buttons.add((Button) input);
@@ -36,10 +35,10 @@ public class InputAndClickButtonForm extends Form {
             }
         }
         for (Button input: buttons) {
-            inputGeneratorFactory.getGenerator(input);
+            activeGenerators.add(inputGeneratorFactory.getGenerator(input));
         }
         for (PassiveInputElement input: passive) {
-            inputGeneratorFactory.getGenerator(input);
+            passiveGenerators.add(inputGeneratorFactory.getGenerator(input));
         }
     }
 

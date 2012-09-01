@@ -8,7 +8,6 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.TextInputGenerat
  * User: karlicos
  * Date: 8/25/12
  * Time: 7:18 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Password extends TextInputElement {
 

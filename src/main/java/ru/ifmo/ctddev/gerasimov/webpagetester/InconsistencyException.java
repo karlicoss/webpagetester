@@ -6,7 +6,6 @@ package ru.ifmo.ctddev.gerasimov.webpagetester;
  * User: karlicos
  * Date: 9/1/12
  * Time: 4:10 AM
- * To change this template use File | Settings | File Templates.
  */
 public class InconsistencyException extends RuntimeException {
     public InconsistencyException() {

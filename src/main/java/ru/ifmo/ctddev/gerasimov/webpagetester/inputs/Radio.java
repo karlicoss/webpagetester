@@ -8,7 +8,6 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.UniformFiniteInp
  * User: karlicos
  * Date: 8/25/12
  * Time: 7:32 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Radio extends FiniteInputElement { //TODO extract Radiogroup class?
     public Radio(WebNode node) {

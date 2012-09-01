@@ -5,7 +5,6 @@ package ru.ifmo.ctddev.gerasimov.webpagetester.utils;
  * User: karlicos
  * Date: 8/26/12
  * Time: 10:14 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Pair<A, B> {
     public final A first;

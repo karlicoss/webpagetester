@@ -10,7 +10,6 @@ import java.util.Random;
  * User: karlicos
  * Date: 8/25/12
  * Time: 7:13 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class TextInputElement extends InfiniteInputElement {
     public TextInputElement(WebNode node) {

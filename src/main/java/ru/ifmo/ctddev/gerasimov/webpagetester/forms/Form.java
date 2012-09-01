@@ -13,7 +13,6 @@ import java.util.List;
  * User: karlicos
  * Date: 8/28/12
  * Time: 4:25 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class Form {
     protected final WebNode form;
@@ -29,7 +28,6 @@ public abstract class Form {
     private static void getInputNodes(WebNode node, List<WebNode> result, InputElementFactory inputFactory) {
         if (inputFactory.isInput(node) && node.isDisplayed()) {
             result.add(node);
-            return;
         } else {
             for (WebNode child: node.children) {
                 getInputNodes(child, result, inputFactory);
@@ -90,9 +88,10 @@ public abstract class Form {
         }
         List<Form> answer = new ArrayList<Form>();
         for (WebNode wnode: result.first) {
-            Form form = formFactory.makeForm(wnode.copy(), inputFactory);
-            if (form != null)
-                answer.add(form);
+            WebNode cnode = wnode.copy();
+            if (formFactory.isForm(cnode)) {
+                answer.add(formFactory.makeForm(cnode, inputFactory));
+            }
         }
         return answer;
     }

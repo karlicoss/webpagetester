@@ -7,7 +7,6 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
  * User: karlicos
  * Date: 8/31/12
  * Time: 9:57 PM
- * To change this template use File | Settings | File Templates.
  */
 public class HrefLink extends Link {
     protected HrefLink(WebNode node) {

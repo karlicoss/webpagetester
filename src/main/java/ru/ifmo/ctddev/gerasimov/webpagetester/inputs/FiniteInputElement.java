@@ -10,7 +10,6 @@ import java.util.Random;
  * User: karlicos
  * Date: 8/24/12
  * Time: 10:57 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class FiniteInputElement extends PassiveInputElement {
     final protected String[] variants;

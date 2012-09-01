@@ -7,7 +7,6 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
  * User: karlicos
  * Date: 8/31/12
  * Time: 6:10 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Button extends ActiveInputElement {
     public Button(WebNode node) {

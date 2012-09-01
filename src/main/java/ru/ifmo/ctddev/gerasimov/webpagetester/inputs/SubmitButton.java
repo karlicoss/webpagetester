@@ -10,7 +10,6 @@ import java.util.Random;
  * User: karlicos
  * Date: 8/29/12
  * Time: 12:54 AM
- * To change this template use File | Settings | File Templates.
  */
 public class SubmitButton extends Button {
 

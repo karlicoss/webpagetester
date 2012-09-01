@@ -11,7 +11,6 @@ import java.util.Random;
  * User: karlicos
  * Date: 8/24/12
  * Time: 11:01 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Textarea extends TextInputElement {
     public Textarea(WebNode node) {

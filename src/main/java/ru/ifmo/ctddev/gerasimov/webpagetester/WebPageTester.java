@@ -1,10 +1,11 @@
-package ru.ifmo.ctddev.gerasimov.webpagetester; /**
+package ru.ifmo.ctddev.gerasimov.webpagetester;
+/**
  * Created with IntelliJ IDEA.
  * User: karlicos
  * Date: 8/22/12
  * Time: 6:22 PM
- * To change this template use File | Settings | File Templates.
  */
+import org.apache.commons.configuration.ConfigurationException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,10 +17,7 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.links.Link;
 import ru.ifmo.ctddev.gerasimov.webpagetester.links.LinkFactory;
 import ru.ifmo.ctddev.gerasimov.webpagetester.utils.Pair;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 
 public class WebPageTester {
@@ -30,8 +28,8 @@ public class WebPageTester {
         this.driver = driver;
     }
 
-    private void linkTests(WebNode root) throws FileNotFoundException {
-        PrintWriter out = new PrintWriter(new File(testName + ".links"));
+    private void linkTests(WebNode root) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter out = new PrintWriter(testName + ".links", "UTF-8");
 
         List<Link> links = Link.getLinks(root, LinkFactory.getInstance());
         for (Link link: links) {
@@ -41,15 +39,15 @@ public class WebPageTester {
         out.close();
     }
 
-    private void formTests(WebNode root) throws FileNotFoundException {
-        PrintWriter out = new PrintWriter(new File(testName + ".forms"));
+    private void formTests(WebNode root) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter out = new PrintWriter(testName + ".forms", "UTF-8");
 
         List<Form> forms = Form.getForms(root, FormFactory.getInstance(), InputElementFactory.getInstance());
-        System.err.println(forms);
+        //System.err.println(forms);
         for (Form form: forms) {
-            System.err.println("Processing " + form);
+            //System.err.println("Processing " + form);
             out.println("Processing " + form);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < Config.getInstance().getInt("forms.testcases"); i++) {
                 out.println("Test case #" + i);
                 List<Pair<InputElement, String>> test = form.generate();
                 for (Pair<InputElement, String> p: test) {
@@ -74,8 +72,9 @@ public class WebPageTester {
         driver.quit();
     }
 
-    public static void main(String[] args) throws IOException {
-        System.setProperty("webdriver.chrome.driver", "/L/tmp/chromedriver");
+    public static void main(String[] args) throws IOException, ConfigurationException {
+        //System.setProperty("webdriver.chrome.driver", "/L/tmp/chromedriver");
+        Config.init("config.properties");
         new WebPageTester(new FirefoxDriver()).run(args[0]);
     }
 }

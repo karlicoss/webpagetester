@@ -10,7 +10,6 @@ import java.util.List;
  * User: karlicos
  * Date: 8/31/12
  * Time: 9:56 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class Link {
     protected final WebNode node;

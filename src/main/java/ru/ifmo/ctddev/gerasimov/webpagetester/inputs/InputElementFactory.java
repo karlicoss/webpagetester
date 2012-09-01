@@ -9,7 +9,6 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.WebNode;
  * User: karlicos
  * Date: 8/31/12
  * Time: 4:51 PM
- * To change this template use File | Settings | File Templates.
  */
 public class InputElementFactory {
     protected static InputElementFactory instance = new InputElementFactory();

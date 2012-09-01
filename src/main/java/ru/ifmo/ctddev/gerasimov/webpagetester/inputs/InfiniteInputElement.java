@@ -8,7 +8,6 @@ import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators.InfiniteInputGen
  * User: karlicos
  * Date: 8/24/12
  * Time: 10:58 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class InfiniteInputElement extends PassiveInputElement {
 

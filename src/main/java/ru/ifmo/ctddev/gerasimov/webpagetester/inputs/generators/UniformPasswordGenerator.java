@@ -1,5 +1,6 @@
 package ru.ifmo.ctddev.gerasimov.webpagetester.inputs.generators;
 
+import ru.ifmo.ctddev.gerasimov.webpagetester.Config;
 import ru.ifmo.ctddev.gerasimov.webpagetester.inputs.Password;
 
 import java.util.Random;
@@ -14,10 +15,10 @@ import java.util.Random;
 public class UniformPasswordGenerator extends UniformTextInputGenerator {
 
     public UniformPasswordGenerator(Password password, int length) {
-        super(password, "abcdef123#".toCharArray(), length);
+        super(password, Config.getInstance().getString("password.possiblechars").toCharArray(), length);
     }
 
     public UniformPasswordGenerator(Password password, int length, Random random) {
-        super(password, "abcdef123#".toCharArray(), length, random);
+        super(password, Config.getInstance().getString("password.possiblechars").toCharArray(), length, random);
     }
 }
